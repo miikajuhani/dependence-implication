@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y \
-            texlive-latex-recommended texlive-fonts-recommended lmodern
+            texlive-latex-recommended texlive-fonts-recommended texlive-pictures lmodern
 
       - name: Set up and build Lean
         uses: leanprover/lean-action@v1

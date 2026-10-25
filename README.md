@@ -14,7 +14,9 @@ Questions and subquestions are proposed through pull requests; see
 
 | Question | Solved | Human-checked solution | Formalized | Human-checked formalization |
 | --- | --- | --- | --- | --- |
-| [Q1: Complexity of implication for disjunctions of dependence atoms](questions/Q1.md) | yes | no | no | no |
+| [Q1: Complexity of implication for disjunctions of dependence atoms](questions/Q1.md) | yes | no | yes | no |
+| &emsp;↳ [Q1.1: Syntactic restrictions for decidable implication](questions/Q1.1.md) | no | no | no | no |
+| &emsp;↳ [Q1.2: Syntactic restrictions for PTIME implication](questions/Q1.2.md) | no | no | no | no |
 
 All four status fields use `yes`, `no`, or `partially`. A question's page in
 [`questions/`](questions/) records its precise statement, subquestions,
@@ -84,6 +86,7 @@ the content.
 The project uses `pdflatex`, Python 3, and Lean **4.35.0** through `elan`.
 
 ```sh
+(cd lean && lake exe cache get)  # Download compiled mathlib dependencies
 ./scripts/build-pdfs.sh    # Rebuild both PDFs
 ./scripts/check.sh         # Build PDFs, build Lean, and run listed axiom audits
 ```
@@ -92,8 +95,8 @@ GitHub Actions runs the checks on pull requests and pushes to `main`, and
 provides the built PDFs as workflow artifacts. LaTeX auxiliaries and local
 Lean caches are ignored by Git.
 
-The Lean scaffold initially has no question modules or mathematical
-declarations. See [`lean/README.md`](lean/README.md) for its organization.
+The Lean project includes the Q1 formalization. See
+[`lean/README.md`](lean/README.md) for its organization and build instructions.
 
 ## License
 

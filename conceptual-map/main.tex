@@ -1,17 +1,66 @@
 \documentclass[10pt,a4paper,landscape]{article}
-\input{preamble.tex}
+% Support compilation from either the repository root or this directory.
+\IfFileExists{preamble.tex}
+  {\newcommand{\projectroot}{.}}
+  {\newcommand{\projectroot}{..}}
+\input{\projectroot/preamble.tex}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
+\geometry{margin=12mm}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
 
-\title{Dependence Implication: Conceptual Map}
-\author{}
-\date{}
+\definecolor{mapink}{HTML}{243E52}
+\definecolor{mapmuted}{HTML}{526A7A}
+\definecolor{mapline}{HTML}{C8D5DF}
+\definecolor{mapteal}{HTML}{2295A2}
+\definecolor{mapgreen}{HTML}{337A62}
+\definecolor{mapamber}{HTML}{AE742B}
+\definecolor{mapviolet}{HTML}{8063BF}
+
+\newcommand{\mapdep}[2]{\mathord{=}(#1;#2)}
+\newlength{\mapfullwidth}
+\newlength{\maphalfwidth}
+\setlength{\mapfullwidth}{\dimexpr\textwidth-10mm-1pt\relax}
+\setlength{\maphalfwidth}{\dimexpr(\textwidth-8mm-1pt)/2-10mm\relax}
+\tikzset{
+  mapbox/.style={draw=mapline,fill=mapline!10,rounded corners=2.4mm,
+    line width=0.55pt,inner xsep=5mm,inner ysep=3.5mm,
+    text=mapink,align=left,font=\fontsize{10.5}{14}\selectfont},
+  fullbox/.style={mapbox,text width=\mapfullwidth},
+  halfbox/.style={mapbox,text width=\maphalfwidth,minimum height=31mm},
+  flow/.style={draw=mapmuted!80,line width=0.6pt,-{Stealth[length=2.2mm]}}
+}
 
 \begin{document}
-\maketitle
-\begin{center}
-Concepts, questions, results, and their connections will be collected here
-as contributions are accepted.
-\end{center}
+\color{mapink}
+{\fontsize{23}{27}\selectfont\bfseries Dependence Implication}\par
+\vspace{1.5mm}
+{\large Conceptual map: solved and open questions}\par
+\vspace{4mm}
 
-% Include accepted question-map fragments here with \input{...}.
+\begin{tikzpicture}
+\node[fullbox,anchor=north west] (definitions) at (0,0) {
+  {\large\bfseries Definitions}\par\smallskip
+  \begin{minipage}[t]{0.48\linewidth}
+    \textbf{Team.} A set $T\subseteq D^V$ of assignments $s:V\to D$.\par
+    \smallskip
+    \textbf{Dependence atom.} $T\models\mapdep Xy$ means that rows
+    agreeing on $X$ also agree on $y$.
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.49\linewidth}
+    \textbf{Disjunction.} $T\models\bigvee_{i=1}^k\alpha_i$ if
+    $T=\bigcup_{i=1}^k T_i$ with $T_i\models\alpha_i$.\par
+    \smallskip
+    \textbf{Implication.} $\Sigma\models\varphi$ if every team satisfying
+    all premises in $\Sigma$ also satisfies $\varphi$.
+  \end{minipage}\par\medskip
+  {\small\color{mapmuted} $D$ is any nonempty value domain; $V$ contains
+  the finitely many input variables. Disjunctions are nonempty.
+  Cover parts may overlap or be empty; repeated atoms count separately.}
+};
+
+\input{\projectroot/conceptual-map/questions/Q1.tex}
+\end{tikzpicture}
 
 \end{document}

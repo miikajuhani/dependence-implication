@@ -1,0 +1,49 @@
+\node[fullbox,anchor=north west,draw=mapteal,fill=mapteal!5]
+  (foundation) at ([yshift=-5mm]definitions.south west) {
+  \textbf{Finite and unrestricted implication coincide}\hfill
+  $\Sigma\models_{\mathrm{fin}}\varphi\ \Longleftrightarrow\ \Sigma\models\varphi$
+  \par\smallskip
+  Every failure of implication has a finite counterteam.
+};
+\draw[flow] (definitions.south) -- (foundation.north);
+
+\node[fullbox,anchor=north west,draw=mapgreen,fill=mapgreen!5]
+  (qone) at ([yshift=-5mm]foundation.south west) {
+  {\large\bfseries Q1\quad General complexity}\hfill
+  {\small\bfseries\color{mapgreen} SOLVED}\par\medskip
+  {\large\bfseries co-r.e.-complete}\quad under computable many-one
+  reductions; hence undecidable.\par\medskip
+  Hardness already holds for the fixed consequent
+  \[
+    \varphi_* =
+    \mapdep wz\vee\mapdep wz\vee
+    \mapdep Uw\vee\mapdep Uw\vee
+    \mapdep Vw\vee\mapdep Vw.
+  \]
+  At most \textbf{five atom occurrences per premise}; every variable
+  except $U,V,X,Y,w$ has an explicit bound of at most three values.
+  \par\smallskip
+  \textbf{Counterteam size.} No computable input-dependent bound exists
+  on the size of a smallest finite counterteam.
+};
+\draw[flow] (foundation.south) -- (qone.north);
+
+\node[halfbox,anchor=north west,draw=mapamber,fill=mapamber!5]
+  (decidable) at ([yshift=-10mm]qone.south west) {
+  {\large\bfseries Q1.1\quad Decidability}\hfill
+  {\small\bfseries\color{mapamber} OPEN}\par\medskip
+  Which syntactic restrictions on the premises and consequent
+  guarantee \textbf{decidable implication}?
+};
+\node[halfbox,anchor=north east,draw=mapviolet,fill=mapviolet!5]
+  (tractable) at ([yshift=-10mm]qone.south east) {
+  {\large\bfseries Q1.2\quad Tractability}\hfill
+  {\small\bfseries\color{mapviolet} OPEN}\par\medskip
+  Which syntactic restrictions on the premises and consequent
+  guarantee \textbf{polynomial-time implication}?\par\smallskip
+  {\small Time is measured in the total explicit input length.}
+};
+\coordinate (branch) at ([yshift=-5mm]qone.south);
+\draw[draw=mapmuted!80,line width=0.6pt] (qone.south) -- (branch);
+\draw[flow] (branch) -| (decidable.north);
+\draw[flow] (branch) -| (tractable.north);
